@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
   <title>ExperimentEvaluators</title>
   <style>
@@ -58,16 +58,9 @@
       border-radius: 5px;
       transition: transform 0.3s ease;
     }
-    
-    .checkbox-label {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-    }
-    
+
     input[type="checkbox"] {
-      margin: 0;
-      margin-right: 5px;
+      margin: 0 5px 0 0;
     }
 
     /* Media Queries */
@@ -107,7 +100,7 @@
   </style>
   <script>
     function moveButton() {
-      var button = document.getElementById("send-button");
+      const button = document.getElementById("send-button");
       button.style.transform = "translateY(-10px)";
     }
   </script>
@@ -118,24 +111,24 @@
   
   <form id="experimentForm">
     <h3>Hypothesis</h3>
-    <textarea name="hypothesis" rows="10" cols="50" id="hypothesis"></textarea>
+    <label for="hypothesis"></label><textarea name="hypothesis" rows="10" cols="50" id="hypothesis"></textarea>
     
     <h3>Material</h3>
-    <textarea name="material" rows="10" cols="50" id="material"></textarea>
+    <label for="material"></label><textarea name="material" rows="10" cols="50" id="material"></textarea>
     
     <h3>Implementation</h3>
-    <textarea name="implementation" rows="10" cols="50" id="implementation"></textarea>
+    <label for="implementation"></label><textarea name="implementation" rows="10" cols="50" id="implementation"></textarea>
     
     <h3>Observation</h3>
-    <textarea name="observation" rows="10" cols="50" id="observation"></textarea>
+    <label for="observation"></label><textarea name="observation" rows="10" cols="50" id="observation"></textarea>
     
     <h3>Result</h3>
-    <textarea name="result" rows="10" cols="50" id="result"></textarea>
+    <label for="result"></label><textarea name="result" rows="10" cols="50" id="result"></textarea>
 
-    <label class="checkbox-label">
+    <label>
       <input type="checkbox" name="data-protection" required>
-      I agree to the Data Protection Agreement.
-      </label>
+    </label>
+    I agree to the Data Protection Agreement.
     <br>
     <input type="submit" id="send-button" value="Send" onclick="moveButton()">
   </form>
