@@ -74,11 +74,11 @@ form.addEventListener('submit', (e) => {
     })
         .then(response => response.json())
         .then(data => {
-            // do something with the response
+            // TODO: do something with the response
             console.log(data);
         })
         .catch(error => {
-            // handle the error
+            // TODO: handle the error
             console.error(error);
         });
     
