@@ -25,7 +25,7 @@
     }
     
     form {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
       background-color: white;
       padding: 20px;
@@ -181,6 +181,28 @@
     .logo-link {
       display: inline-block;
     }
+
+    .input-container {
+      position: relative;
+    }
+
+    .clear-button {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #0065BD;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .input-container:hover .clear-button {
+      display: block;
+    }
   </style>
   <script>
     function moveButton() {
@@ -196,6 +218,31 @@
         menuIcon.classList.remove("clicked");
         menuItems.style.display = "none";
       }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const inputFields = document.querySelectorAll('.input-container input, .input-container textarea');
+
+      inputFields.forEach((field) => {
+        const clearButton = document.createElement('button');
+        clearButton.classList.add('clear-button');
+        clearButton.innerHTML = 'Clear';
+
+        const inputContainer = field.parentNode;
+        inputContainer.classList.add('input-container');
+        inputContainer.appendChild(clearButton);
+
+        field.addEventListener('input', () => {
+          clearButton.style.display = field.value ? 'block' : 'none';
+        });
+
+        clearButton.addEventListener('click', () => {
+          event.preventDefault();
+          event.stopPropagation();
+          field.value = '';
+          clearButton.style.display = 'none';
+        });
+      });
     });
 
     function toggleMenu() {
@@ -226,23 +273,35 @@
   
   <form id="experimentForm">
     <h3>Question</h3>
-    <label for="question"></label><textarea name="question" rows="10" cols="50" id="question"></textarea>
+    <div class="input-container">
+      <label for="question"></label><textarea name="question" rows="10" cols="50" id="question"></textarea>
+    </div>
 
     <h3>Hypothesis</h3>
-    <label for="hypothesis"></label><textarea name="hypothesis" rows="10" cols="50" id="hypothesis"></textarea>
-    
-    <h3>Material</h3>
-    <label for="material"></label><textarea name="material" rows="10" cols="50" id="material"></textarea>
-    
-    <h3>Implementation</h3>
-    <label for="implementation"></label><textarea name="implementation" rows="10" cols="50" id="implementation"></textarea>
-    
-    <h3>Observation</h3>
-    <label for="observation"></label><textarea name="observation" rows="10" cols="50" id="observation"></textarea>
-    
-    <h3>Result</h3>
-    <label for="result"></label><textarea name="result" rows="10" cols="50" id="result"></textarea>
+    <div class="input-container">
+      <label for="hypothesis"></label><textarea name="hypothesis" rows="10" cols="50" id="hypothesis"></textarea>
+    </div>
 
+    <h3>Material</h3>
+    <div class="input-container">
+      <label for="material"></label><textarea name="material" rows="10" cols="50" id="material"></textarea>
+    </div>
+
+    <h3>Implementation</h3>
+    <div class="input-container">
+      <label for="implementation"></label><textarea name="implementation" rows="10" cols="50" id="implementation"></textarea>
+    </div>
+
+    <h3>Observation</h3>
+    <div class="input-container">
+      <label for="observation"></label><textarea name="observation" rows="10" cols="50" id="observation"></textarea>
+    </div>
+
+    <h3>Result</h3>
+    <div class="input-container">
+      <label for="result"></label><textarea name="result" rows="10" cols="50" id="result"></textarea>
+    </div>
+    
     <label>
       <input type="checkbox" name="data-protection" required>
     </label>
