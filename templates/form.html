@@ -52,7 +52,7 @@
       margin: 20px auto;
       padding: 10px 20px;
       font-size: 18px;
-      background-color: blue;
+      background-color: #0065BD;
       color: white;
       border: none;
       border-radius: 5px;
@@ -97,19 +97,137 @@
         padding: 8px 16px;
       }
     }
+
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      background-color: transparent;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after,
+    .menu-icon div {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #000;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-icon::before {
+      top: 0;
+    }
+
+    .menu-icon div {
+      top: 9px;
+    }
+
+    .menu-icon::after {
+      bottom: 0;
+    }
+
+    .menu-icon.clicked::before {
+      transform: translateY(-5px) rotate(45deg);
+    }
+
+    .menu-icon.clicked::after {
+      transform: translateY(5px) rotate(-45deg);
+    }
+
+    .menu-icon.clicked div {
+      transform: scale(20);
+    }
+
+    .menu-items {
+      position: absolute;
+      top: 40px;
+      left: 20px;
+      display: none;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu-icon.clicked + .menu-items {
+      display: block;
+    }
+
+    .menu-items li {
+      color: #0065BD;
+      list-style-type: none;
+      padding: 5px 0;
+    }
+
+    #tum-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 120px; 
+      height: auto;
+    }
+
+    .logo-link {
+      display: inline-block;
+    }
   </style>
   <script>
     function moveButton() {
       const button = document.getElementById("send-button");
       button.style.transform = "translateY(-10px)";
     }
+
+    document.addEventListener("click", function(event) {
+      var menuIcon = document.getElementById("menu-icon");
+      var menuItems = document.getElementsByClassName("menu-items")[0];
+
+      if (event.target !== menuIcon && event.target !== menuItems) {
+        menuIcon.classList.remove("clicked");
+        menuItems.style.display = "none";
+      }
+    });
+
+    function toggleMenu() {
+      var menuIcon = document.getElementById("menu-icon");
+      var menuItems = document.getElementsByClassName("menu-items")[0];
+
+      menuIcon.classList.toggle("clicked");
+      menuItems.style.display = menuIcon.classList.contains("clicked") ? "block" : "none";
+    }
   </script>
 </head>
 <body>
+
+  <div class="menu-icon" onclick="toggleMenu()" id="menu-icon"></div>
+
+  <ul class="menu-items">
+    <li><a href="imprint.html" target="_blank">Imprint</a></li>
+    <li><a href="about.html" target="_blank">About</a></li>
+    <li><a href="privacy.html" target="_blank">Privacy Policy</a></li>
+  </ul>
+
+  <a href="https://www.tum.de/" target="_blank" class="logo-link">
+    <img src="img/TUM_Logo_extern_mt_DE_RGB_j.jpg" alt="TUM Logo" id="tum-logo">
+  </a>
+  
   <h1>ExperimentEvaluators</h1>
   <h2 class="subtitle">Empower Your Experiments, Enhance Your Learning</h2>
   
   <form id="experimentForm">
+    <h3>Question</h3>
+    <label for="question"></label><textarea name="question" rows="10" cols="50" id="question"></textarea>
+
     <h3>Hypothesis</h3>
     <label for="hypothesis"></label><textarea name="hypothesis" rows="10" cols="50" id="hypothesis"></textarea>
     
