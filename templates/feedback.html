@@ -24,6 +24,14 @@
       color: #888;
       margin-bottom: 30px;
     }
+
+    h2.subtitle-left {
+      text-align: left;
+      font-size: 30px;
+      color: #000;
+      margin-bottom: 30px;
+      margin-left: 40px;
+    }
     
     form {
       max-width: 800px;
@@ -38,6 +46,7 @@
       margin-top: 20px;
       padding: 10px;
       border-radius: 3px;
+      color: #0065BD;
     }
     
     textarea {
@@ -46,28 +55,6 @@
       border: 1px solid #ccc;
       padding: 5px;
       box-sizing: border-box;
-    }
-    
-    input[type="submit"] {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 18px;
-      background-color: #0065BD;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      transition: transform 0.3s ease;
-    }
-
-    input[type="checkbox"] {
-      margin: 0 5px 0 0;
-    }
-
-    .checkbox-container {
-      display: flex;
-      align-items: flex-start;
-      margin-top: 20px;
     }
 
     .menu-icon {
@@ -153,37 +140,8 @@
     .logo-link {
       display: inline-block;
     }
-
-    .input-container {
-      position: relative;
-    }
-
-    .clear-button {
-      display: none;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #0065BD;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .input-container:hover .clear-button {
-      display: block;
-    }
   </style>
   <script>
-    /*
-    function moveButton() {
-      const button = document.getElementById("send-button");
-      button.style.transform = "translateY(-10px)";
-    }
-    */
-
     document.addEventListener("click", function(event) {
       var menuIcon = document.getElementById("menu-icon");
       var menuItems = document.getElementsByClassName("menu-items")[0];
@@ -192,31 +150,6 @@
         menuIcon.classList.remove("clicked");
         menuItems.style.display = "none";
       }
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const inputFields = document.querySelectorAll('.input-container input, .input-container textarea');
-
-      inputFields.forEach((field) => {
-        const clearButton = document.createElement('button');
-        clearButton.classList.add('clear-button');
-        clearButton.innerHTML = 'Clear';
-
-        const inputContainer = field.parentNode;
-        inputContainer.classList.add('input-container');
-        inputContainer.appendChild(clearButton);
-
-        field.addEventListener('input', () => {
-          clearButton.style.display = field.value ? 'block' : 'none';
-        });
-
-        clearButton.addEventListener('click', () => {
-          event.preventDefault();
-          event.stopPropagation();
-          field.value = '';
-          clearButton.style.display = 'none';
-        });
-      });
     });
 
     function toggleMenu() {
@@ -243,8 +176,9 @@
   
   <h1>ExperimentEvaluators</h1>
   <h2 class="subtitle">Empower Your Experiments, Enhance Your Learning</h2>
-  
-  <form id="experimentForm" action="feedback.html" method="post">
+  <h2 class="subtitle-left">Feedback</h2>
+
+  <form id="experimentFeedback">
     <h3>Question</h3>
     <div class="input-container">
       <label for="question"></label><textarea name="question" rows="10" cols="50" id="question"></textarea>
@@ -274,23 +208,7 @@
     <div class="input-container">
       <label for="result"></label><textarea name="result" rows="10" cols="50" id="result"></textarea>
     </div>
-    
-    <div class="checkbox-container">
-      <label>
-        <input type="checkbox" name="data-protection" id="privacyCheckbox" required>
-        I have read and agree to the Data Protection Agreement. I consent to the collection, storage, and processing of my personal data as outlined, ensuring its secure handling in compliance with data protection laws.
-      </label>
-    </div>
-    
-    <br>
-    <input type="submit" id="send-button" value="Send" onclick="sendData()">
   </form>
-  <script src="../static/data_submit.js"></script>
-  <script>
-    document.getElementById("experimentForm").addEventListener("submit", function() {
-      window.location.href = "feedback.html";
-    });
-  </script>
 </body>
 </html>
 
