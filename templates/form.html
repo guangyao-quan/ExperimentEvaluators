@@ -177,13 +177,6 @@
     }
   </style>
   <script>
-    /*
-    function moveButton() {
-      const button = document.getElementById("send-button");
-      button.style.transform = "translateY(-10px)";
-    }
-    */
-
     document.addEventListener("click", function(event) {
       var menuIcon = document.getElementById("menu-icon");
       var menuItems = document.getElementsByClassName("menu-items")[0];
@@ -225,6 +218,42 @@
 
       menuIcon.classList.toggle("clicked");
       menuItems.style.display = menuIcon.classList.contains("clicked") ? "block" : "none";
+    }
+
+    function sendData() {
+      var questionInput = document.getElementById("question").value;
+      var hypothesisInput = document.getElementById("hypothesis").value;
+      var materialInput = document.getElementById("material").value;
+      var implementationInput = document.getElementById("implementation").value;
+      var observationInput = document.getElementById("observation").value;
+      var resultInput = document.getElementById("result").value;
+
+      var data = {
+          question: questionInput,
+          hypothesis: hypothesisInput,
+          material: materialInput,
+          implementation: implementationInput,
+          observation: observationInput,
+          result: resultInput
+      };
+
+      fetch('http://127.0.0.1:5000/data_process', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      })
+      .then(response => {
+          if (response.ok) {
+              console.log('Data sent successfully');
+          } else {
+              console.error('Data sent failed');
+          }
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      })
     }
   </script>
 </head>
@@ -285,7 +314,6 @@
     <br>
     <input type="submit" id="send-button" value="Send" onclick="sendData()">
   </form>
-  <script src="../static/data_submit.js"></script>
   <script>
     document.getElementById("experimentForm").addEventListener("submit", function() {
       window.location.href = "feedback.html";

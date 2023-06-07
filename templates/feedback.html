@@ -141,7 +141,6 @@
       display: inline-block;
     }
   </style>
-  <script src="/static/data_recv.js"></script>
   <script>
     document.addEventListener("click", function(event) {
       var menuIcon = document.getElementById("menu-icon");
@@ -151,7 +150,7 @@
         menuIcon.classList.remove("clicked");
         menuItems.style.display = "none";
       }
-    });
+    })
 
     function toggleMenu() {
       var menuIcon = document.getElementById("menu-icon");
@@ -160,6 +159,47 @@
       menuIcon.classList.toggle("clicked");
       menuItems.style.display = menuIcon.classList.contains("clicked") ? "block" : "none";
     }
+
+    function populateFeedbackForm(data) {
+      var feedbackForm = document.getElementById("experimentFeedback");
+    
+      feedbackForm.question.value = data.question;
+      feedbackForm.hypothesis.value = data.hypothesis;
+      feedbackForm.material.value = data.material;
+      feedbackForm.implementation.value = data.implementation;
+      feedbackForm.observation.value = data.observation;
+      feedbackForm.result.value = data.result;
+    }
+    /*
+    const sampleData = {
+      question: "Sample Question",
+      hypothesis: "Sample Hypothesis",
+      material: "Sample Material",
+      implementation: "Sample Implementation",
+      observation: "Sample Observation",
+      result: "Sample Result"
+    };
+    window.addEventListener("DOMContentLoaded", () => {
+      populateFeedbackForm(sampleData);
+    });
+    */
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('http://127.0.0.1:5000/data_return', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => { 
+          populateFeedbackForm(data);
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      })
+    })
+    
   </script>
 </head>
 <body>
